@@ -1,0 +1,506 @@
+{
+	"info": {
+		"_postman_id": "c39111ea-4882-4090-98fa-af94690b9e89",
+		"name": "Endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21180622",
+		"_collection_link": "https://www.postman.com/interstellar-spaceship-523378/workspace/flight-manager/collection/21180622-c39111ea-4882-4090-98fa-af94690b9e89?action=share&source=collection_link&creator=21180622"
+	},
+	"item": [
+		{
+			"name": "Create Receipt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"user_name\":\"\",\r\n    \"email\":\"\",\r\n    \"departure_airport\":\"\",\r\n    \"departure_date\":\"\",\r\n    \"arrival_airport\":\"\",\r\n    \"arrival_date\":\"\",\r\n    \"price\":\"\",\r\n    \"quantity\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/receipt",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"receipt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Send Email",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"to\":\"\",\r\n    \"subject\":\"\",\r\n    \"text\":\"\",\r\n    \"html\":\"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/email/send",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"email",
+						"send"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Flights",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/flights?amount=10&page=1",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"flights"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				},
+				"description": "Se puede agregar params como amount={number} y page={page}"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Flight",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/flights/1",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"flights",
+						"1"
+					]
+				},
+				"description": "You can change the id (in the example 1) to ask for an especific flight"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tickets",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/tickers/user",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"tickers",
+						"user"
+					]
+				},
+				"description": "Puedes buscar por **sessionId** los tickets de un user"
+			},
+			"response": []
+		},
+		{
+			"name": "Book Flight",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"session_id\": \"\",\r\n    \"quantity\": 0,\r\n    \"flight_id\": 0,\r\n    \"datetime\": \"\",\r\n    \"deposit_token\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/requests",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"requests"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Upcoming Flights",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"purchaseDate\": \"\",\r\n    \"destinationAirportId\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/flights/upcoming",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"flights",
+						"upcoming"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate Recommendations",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"flights\": [],\r\n    \"ip_coord\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/requests/recommendations",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"requests",
+						"recommendations"
+					]
+				},
+				"description": "Se debe agregar **sessionId** a la url para generar recomendaciones para ese usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Recommendation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/requests/recommendations",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"requests",
+						"recommendations"
+					]
+				},
+				"description": "Se debe entregar a la URL el id del **job**"
+			},
+			"response": []
+		},
+		{
+			"name": "Check Recommendations Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/requests/recommendations",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"requests",
+						"recommendations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sessionId\": \"\",\r\n    \"email\": \"\",\r\n    \"username\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/users",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/users/check",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"users",
+						"check"
+					]
+				},
+				"description": "Se tiene que entregar en la URL el **userId**"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Recommendations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/users/recommendations",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"users",
+						"recommendations"
+					]
+				},
+				"description": "Se tiene que entregar en la URL el **UserId**"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"buy_order\": \"\",\r\n    \"session_id\": \"\",\r\n    \"amount\": 0,\r\n    \"return_url\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/transactions",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"transactions"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/transactions",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"transactions"
+					]
+				},
+				"description": "Se debe entregar el **token** de la transacción en la URL"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/transactions/requests",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"transactions",
+						"requests"
+					]
+				},
+				"description": "Se tiene que entregar en la URL el **RequestId**"
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Transaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"valid\": true,\r\n    \"request_id\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://yfucdzekj0.execute-api.us-east-1.amazonaws.com/prod/transactions/validate",
+					"protocol": "https",
+					"host": [
+						"yfucdzekj0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"transactions",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,27 @@
+name: Test and Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test-and-lint-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+
+
+    - name: Install API dependencies
+      run: npm ci
+      working-directory: ./API
+
+    - name: Lint API
+      run: npm run lint
+      working-directory: ./API

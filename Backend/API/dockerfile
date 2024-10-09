@@ -1,0 +1,26 @@
+ 
+FROM node:20
+
+
+# Create app directory
+WORKDIR /api
+
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm i -g @nestjs/cli
+
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
+COPY . .
+
+ENTRYPOINT ["./start.sh"]
+
+
+# Expose the port the app runs on
+EXPOSE ${API_PORT}

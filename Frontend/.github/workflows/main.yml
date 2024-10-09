@@ -1,0 +1,25 @@
+name: Test and Lint
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  test-and-lint-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+
+
+    - name: Install Frontend dependencies
+      run: npm ci
+
+    - name: Lint Frontend
+      run: npm run lint

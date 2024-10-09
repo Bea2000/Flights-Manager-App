@@ -1,0 +1,54 @@
+name: Build and Push to S3
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID0 }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY0 }}
+          aws-region: us-east-1
+      
+      - name: Create .env file
+        uses: SpicyPizza/create-envfile@v2.0.3
+        with:
+          envkey_NEXT_PUBLIC_AUTH0_SECRET: ${{ secrets.NEXT_PUBLIC_AUTH0_SECRET }}
+          envkey_NEXT_PUBLIC_AUTH0_BASE_URL: ${{ secrets.NEXT_PUBLIC_AUTH0_BASE_URL }}
+          envkey_NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL: ${{ secrets.NEXT_PUBLIC_AUTH0_ISSUER_BASE_URL }}
+          envkey_NEXT_PUBLIC_AUTH0_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_AUTH0_CLIENT_ID }}
+          envkey_NEXT_PUBLIC_AUTH0_CLIENT_SECRET: ${{ secrets.NEXT_PUBLIC_AUTH0_CLIENT_SECRET }}
+          envkey_NEXT_PUBLIC_AUTH0_AUDIENCE: ${{ secrets.NEXT_PUBLIC_AUTH0_AUDIENCE }}
+          envkey_NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+          envkey_NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          directory: ./
+          file_name: .env
+          fail_on_empty: true
+      
+      - name: Push to S3
+        env:
+          AWS_S3_BUCKET: proyecto-arqui
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          npm install
+          npm run build
+          aws s3 sync out/ s3://$AWS_S3_BUCKET --delete
+          aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID \
+          --paths "/*"
